@@ -1,0 +1,11 @@
+.spinner {
+    content: '';
+    position: absolute;
+    top: 49%;
+    right: 10px;
+    background-image: url(../img/spinner.svg);
+    background-repeat: no-repeat;
+    background-size: 32px 32px;
+    width: 32px;
+    height: 32px;
+}

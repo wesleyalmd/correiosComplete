@@ -16,6 +16,7 @@ formsCorreio = {
         inputCep.addEventListener("input", function(){
             if (this.value.length == 8) {
                 formsCorreio.getData(this.value);
+                document.querySelector(".spinner").classList.remove("d-none");
             }
         });
     },
@@ -24,15 +25,16 @@ formsCorreio = {
         fetch(`https://viacep.com.br/ws/${value}/json/`)
         .then(response => {
             if (response.status != 200) {
-                console.log("Error 200")
+                console.log("Error 200");
                 throw Error(response.status);
             }
             else {
-            return response.json();
+                return response.json();
             }
         })
         .then(data => {
             let forms = this.forms;
+            document.querySelector(".spinner").classList.add("d-none");
             document.getElementById(forms['logradouro']).value = data.logradouro;
             document.getElementById(forms['complemento']).value = data.complemento;
             document.getElementById(forms['bairro']).value = data.bairro;
