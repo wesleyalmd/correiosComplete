@@ -4,7 +4,6 @@ correios = {
     forms: {    
         cep:         '.input-cep',
         logradouro:  '.input-rua',
-        numero:      '.input-numero',
         complemento: '.input-complemento',
         bairro:      '.input-bairro',
         localidade:  '.input-cidade',
@@ -41,11 +40,9 @@ correios = {
         })
         .then(data => {
             spinner.classList.add("d-none");
-            document.querySelector(forms['logradouro']).value = data.logradouro;
-            document.querySelector(forms['complemento']).value = data.complemento;
-            document.querySelector(forms['bairro']).value = data.bairro;
-            document.querySelector(forms['localidade']).value = data.localidade;
-            document.querySelector(forms['uf']).value = data.uf;
+            Object.keys(forms).forEach(key => {
+                document.querySelector(forms[key]).value = data[key];
+            });
         })
     }
 }
