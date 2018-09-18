@@ -17,7 +17,7 @@ correios = {
     },
 
     getCep: function(){
-        var inputCep = document.querySelector(this.forms['cep']);
+        let inputCep = document.querySelector(this.forms['cep']);
         inputCep.addEventListener("input", function(){
             if (this.value.length == 8) {
                 correios.getData(this.value);
@@ -27,6 +27,7 @@ correios = {
 
     getData: function(value){
         let spinner = document.querySelector(".spinner");
+        let forms = this.forms;
         spinner.classList.remove("d-none");
 
         fetch(`https://viacep.com.br/ws/${value}/json/`)
@@ -39,13 +40,12 @@ correios = {
             }
         })
         .then(data => {
-            let forms = this.forms;
-            document.querySelector(".spinner").classList.add("d-none");
+            spinner.classList.add("d-none");
             document.querySelector(forms['logradouro']).value = data.logradouro;
             document.querySelector(forms['complemento']).value = data.complemento;
             document.querySelector(forms['bairro']).value = data.bairro;
             document.querySelector(forms['localidade']).value = data.localidade;
-            document.querySelector(forms['uf']).value = data.uf;  
+            document.querySelector(forms['uf']).value = data.uf;
         })
     }
 }
